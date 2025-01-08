@@ -1,0 +1,70 @@
+body-parser is a middleware for Node.js used in web applications to handle incoming request data.
+
+Middleware is a function that processes requests before they reach the final route handler.
+
+When a client (like a browser or Postman) sends data to a server, the data is often in a raw format (like JSON, text, or form data),
+The body-parser middleware parses this raw data into a JavaScript object, making it easier for your application to work with.
+
+How Does It Work?
+Parses Incoming Data: It reads the data sent in the body of an HTTP request.
+Converts to JavaScript Object: Transforms the raw data into a format your application can use (e.g., JSON object).
+Adds to req.body: The parsed data is attached to the req.body object for further processing.
+
+STEPS TO USE BODY-PARSER
+
+To use body-parser, you first need to install it:
+npm install body-parser
+
+EXAMPLE OF USING IN EXPRESS JS
+
+1)PARSING JSON DATA
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+
+// Middleware to parse JSON data
+app.use(bodyParser.json());
+
+app.post('/user', (req, res) => {
+  // Access parsed data
+  const userData = req.body; // Parsed JSON
+  console.log(userData);
+res.send(`Hello, ${userData.name}!`);
+});
+
+app.listen(3000, () => console.log('Server is running on port 3000'));
+
+Send a POST request to /user with JSON data:
+json
+{
+  "name": "Jayanth",
+  "age": 25
+}
+Output: Hello, Jayanth!
+
+
+2)PARSING FORM DATA
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.post('/submit-form', (req, res) => {
+  const formData = req.body; // Parsed form data
+  console.log(formData);
+
+  res.send(`Form received: ${formData.name}`);
+});
+Send form datA
+
+name=Jayanth&age=25
+Output: Form received: Jayanth
+
+Why Use body-parser?
+Convenience: Automatically parses incoming data into JavaScript objects.
+Flexibility: Supports multiple formats (JSON, URL-encoded, text).
+Ease of Use: Simplifies working with request bodies in Express.js.
+
+
+Starting with Express 4.16.0, you don't need to install body-parser as a separate package because its functionality is built into Express using express.json() and express.urlencoded().
+
+Example without body-parser:
+app.use(express.json()); // Parses JSON
+app.use(express.urlencoded({ extended: true })); // Parses form data
