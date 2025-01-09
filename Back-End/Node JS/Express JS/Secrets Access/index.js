@@ -14,6 +14,8 @@ const port = 3000;
 var userIsAuthorised = false;
 //The body Parser is used to parse the body of the request
 app.use(bodyParser.urlencoded({ extended: true }));
+//since body parser middle ware is incorprated to express we dont have to import it seperately
+// app.use(express.urlencoded({extended:true})); works
 //User defined middleware to check the password
 function authorization(req,res,next){
     const password = req.body["password"];
@@ -38,6 +40,7 @@ app.post("/check", (req, res) => {
      //If the user is not authorised then send the index.html file
      else{
             res.sendFile(__dirname + "/public/index.html");
+         //or simply we can use res.redirect("\") the path where it should be redirected to
      }
         
    });
