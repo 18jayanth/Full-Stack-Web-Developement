@@ -1,6 +1,7 @@
 /* In this we have to take the request and combine the 
 city and pet and give it to user */
 
+/*The body Parser should be before to user defined middleware because it provides the req method for our middleware to use */
 import express from "express";
 import { dirname } from "path";
 import bodyParser from "body-parser";
