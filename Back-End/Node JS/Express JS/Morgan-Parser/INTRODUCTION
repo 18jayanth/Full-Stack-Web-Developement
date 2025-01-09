@@ -1,0 +1,59 @@
+Morgan is a popular middleware for logging HTTP requests in Node.js applications using Express.js.
+It provides detailed logs of incoming requests, such as the method, URL, status code, response time, and more.
+This is especially useful for debugging, monitoring, and analyzing your application's behavior.
+
+Why Use Morgan?
+It logs details of each HTTP request your server receives.
+Morgan comes with predefined logging formats (e.g., tiny, dev, combined) that are customizable and suitable for various environments.
+Helps track request data, such as routes accessed, response times, and errors.
+
+To use Morgan, you need to install it as a dependency in your project:
+npm install morgan
+
+Basic Example
+
+const express = require('express');
+const morgan = require('morgan');
+
+const app = express();
+
+// Use Morgan middleware
+app.use(morgan('dev')); // Logs requests in the 'dev' format
+
+app.get('/', (req, res) => {
+  res.send('Hello, world!');
+});
+
+app.listen(3000, () => console.log('Server is running on port 3000'));
+
+For every request, Morgan logs the HTTP method, URL, response status code, and response time.
+Example log for GET /:
+
+GET / 200 5.394 ms - 12
+
+
+2. Predefined Formats
+
+1)dev:
+Short, colorful output for development.
+Example:
+GET / 200 5.394 ms - 12
+
+2)combined:
+Standard Apache combined log format. Ideal for production.
+Includes details like IP address, user-agent, and more.
+::1 - - [08/Jan/2025:12:34:56 +0000] "GET / HTTP/1.1" 200 12 "-" "Mozilla/5.0"
+
+3)common:
+Similar to combined but without user-agent and referer.
+
+4)tiny:
+Minimalistic logging.
+GET / 200 - 5.394 ms
+
+Place morgan middleware at the top of your middleware stack to log all requests, including static file requests and API calls.
+
+Morgan simplifies request logging in Express.js.
+Choose predefined formats like dev for development or combined for production.
+You can customize log formats or log data to a file for advanced use cases.
+
