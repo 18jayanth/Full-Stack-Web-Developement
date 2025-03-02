@@ -1,0 +1,10 @@
+<div>,<p>,<h> are  block level elements
+<span>,<input>,<img> are inline element
+but if u keep it in a container which is flexible then,
+it will remove all the previous rules and tries to display all in one line
+and applies its properties to all elements
+
+flex box always applies on container that holds the elements
+
+align-items:stretch streches elements opposite to flex direction but the container should be flex and not inline-flex
+flex-basis increases size of each content in the container should apply for children not container
